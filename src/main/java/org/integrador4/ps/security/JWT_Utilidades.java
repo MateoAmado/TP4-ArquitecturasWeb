@@ -28,7 +28,7 @@ public class JWT_Utilidades {
 	@Autowired
 	DefaultUserService userService;
 
-	private final String SECRET = "unstringmuydificil";
+	private final String SECRET = "Kb2N1Mg0RM1G9IAGOq6vs2sb4UU4ORFmGgqU+ewV+IPa6mVmKB2lPfGWlQAPi0ByYtYnWIQDiXb0Mz3Uf0HZTg";
 
 	public String extractUsername(String token) {
 		return extractClaim(token, Claims::getSubject);
@@ -48,8 +48,13 @@ public class JWT_Utilidades {
 	}
 
 	public Claims extractAllClaims(String token) {
-		return Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody();
+		return Jwts.parser() // Cambia de parser() a parserBuilder()
+				.setSigningKey(SECRET)
+				.build() // Crea una instancia de JwtParser
+				.parseClaimsJws(token)
+				.getBody();
 	}
+
 
 	private Boolean isTokenExpired(String token) {
 		return extractExpiration(token).before(new Date());
@@ -60,14 +65,17 @@ public class JWT_Utilidades {
 		return createToken(claims, authentication);
 	}
 
+
+
 	private String createToken(Map<String, Object> claims, Authentication authentication) {
 		String role = authentication.getAuthorities().stream().map(r -> r.getAuthority()).collect(Collectors.toSet())
 				.iterator().next();
 		return Jwts.builder()
 				.claim("role", role)
+				.setClaims(claims)
 				.setSubject(authentication.getName())
 				.setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5)))
+				.setExpiration(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(2)))
 				.signWith(SignatureAlgorithm.HS256, SECRET).compact();
 	}
 
@@ -82,7 +90,7 @@ public class JWT_Utilidades {
 		Claims claims = extractAllClaims(token);
 
 		final Collection<? extends GrantedAuthority> authorities = Arrays
-				.stream(claims.get("role").toString().split(",")).map(SimpleGrantedAuthority::new)
+				.stream(claims.get("rol").toString().split(",")).map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toList());
 
 		return new UsernamePasswordAuthenticationToken(userDetails, "", authorities);

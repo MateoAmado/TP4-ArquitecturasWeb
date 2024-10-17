@@ -3,17 +3,19 @@ package org.integrador4.ps.controller;
 
 import org.integrador4.ps.dto.UsuarioDTO;
 import org.integrador4.ps.model.Usuario;
+import org.integrador4.ps.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.parameters.P;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.security.authentication.AuthenticationManager;
 
 
@@ -25,16 +27,21 @@ import org.integrador4.ps.services.DefaultUserService;
 
 
 @RestController
+@RequestMapping("/auth")
 public class AuthController {
-
     @Autowired
-    private AuthenticationManager authManager;
+    AuthenticationManager authManager;
 
     @Autowired
     JWT_Utilidades jwt_utilidad;
 
     @Autowired
     DefaultUserService servicio_usuario;
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @PostMapping("/registro")
     public ResponseEntity<Object> registro(@RequestBody UsuarioDTO usuario_dto) {
@@ -56,6 +63,8 @@ public class AuthController {
         return this.jwt_utilidad.generateToken(authentication);
     }
 
+
+
     @PostMapping("/login")
     public String login(@RequestBody UsuarioDTO usuario_dto) {
         Authentication authentication = authManager.authenticate(
@@ -63,11 +72,13 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         return this.jwt_utilidad.generateToken(authentication);
+
     }
 
-    @GetMapping("/genToken")
-    public String get_token(@RequestBody UsuarioDTO usuario_dto) throws Exception {
 
+    @PostMapping("/genToken")
+    public String get_token(@RequestBody UsuarioDTO usuario_dto) throws Exception {
+        System.out.println(usuario_dto);
         Authentication authentication = authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(usuario_dto.getEmail(), usuario_dto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -78,13 +89,15 @@ public class AuthController {
     @GetMapping("/welcomeAdmin")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String welcome() {
-        return "¡Bienvenido Admin!";
+        return "WelcomeAdmin";
     }
 
     @GetMapping("/welcomeUser")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     public String welcomeUser() {
-        return "¡Bienvenido USER!";
+        return "WelcomeUSER";
     }
+
+
 
 }

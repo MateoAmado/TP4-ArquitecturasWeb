@@ -29,8 +29,11 @@ public class DefaultUserServiceImpl implements DefaultUserService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = this.usuario_repository.findByEmail(username);
 
-		return new org.springframework.security.core.userdetails.User(usuario.getEmail(), usuario.getPassword(),
-				mapRolesToAuthorities(usuario.getRol()));
+		return new org.springframework.security.core.userdetails.User(
+				usuario.getEmail(),
+				usuario.getPassword(),
+				mapRolesToAuthorities(usuario.getRol())
+		);
 	}
 
 	public Collection<? extends GrantedAuthority> mapRolesToAuthorities(String rol) {
@@ -42,9 +45,9 @@ public class DefaultUserServiceImpl implements DefaultUserService {
 
 	@Override
 	public Usuario save(UsuarioDTO usuario_dto) {
-		String role = "ROLE_USER";
-		if (usuario_dto.getRole().equals("ADMIN"))
-			role = "ROLE_ADMIN";
+		String role = "USER";
+		if (usuario_dto.getRol().equals("ADMIN"))
+			role = "ADMIN";
 
 		Usuario usuario = new Usuario();
 		usuario.setEmail(usuario_dto.getEmail());
