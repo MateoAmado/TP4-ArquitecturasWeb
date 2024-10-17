@@ -1,7 +1,7 @@
 package responses;
 
 import lombok.NoArgsConstructor;
-import org.integrador3.ps.model.Carrera;
+import org.integrador4.ps.model.Carrera;
 
 import java.util.List;
 

@@ -4,7 +4,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.integrador3.ps.model.Estudiante_Carrera;
+import org.integrador4.ps.model.Estudiante_Carrera;
 
 import java.util.List;
 

@@ -8,11 +8,11 @@
 		<version>3.3.4</version>
 		<relativePath/> <!-- lookup parent from ps.repository -->
 	</parent>
-	<groupId>org.integrador3</groupId>
-	<artifactId>Integrador-TP3</artifactId>
+	<groupId>org.integrador4</groupId>
+	<artifactId>Integrador-TP4</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Integrador-TP3</name>
-	<description>Integrador-TP3</description>
+	<name>Integrador-TP4</name>
+	<description>Integrador-TP4</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -27,31 +27,49 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>23</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- Base de datos -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.28</version>
+		</dependency>
+
+		<!-- Seguridad -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+		<!-- Test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.28</version> <!-- Utiliza la versión de MySQL que desees -->
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>6.3.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -61,6 +79,8 @@
 		</dependency>
 
 	</dependencies>
+
+
 
 	<build>
 		<plugins>

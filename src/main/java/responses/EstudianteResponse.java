@@ -2,7 +2,7 @@ package responses;
 
 
 import lombok.NoArgsConstructor;
-import org.integrador3.ps.model.Estudiante;
+import org.integrador4.ps.model.Estudiante;
 
 import java.util.List;
 
