@@ -1,10 +1,10 @@
-package org.integrador3;
+package AuthService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class IntegradorTp3ApplicationTests {
+class AutenticacionApplicationTests {
 
 	@Test
 	void contextLoads() {
