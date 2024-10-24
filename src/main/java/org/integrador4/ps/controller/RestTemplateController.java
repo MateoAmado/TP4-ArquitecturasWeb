@@ -1,7 +1,7 @@
 package org.integrador4.ps.controller;
 
 
-import org.integrador4.ps.model.Carrera;
+import org.integrador4.ps.carrera.model.Carrera;
 import org.integrador4.ps.services.ApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import org.integrador4.ps.model.*;
-import org.integrador4.ps.services.*;
 
 @RestController
 @RequestMapping("/rest_template")

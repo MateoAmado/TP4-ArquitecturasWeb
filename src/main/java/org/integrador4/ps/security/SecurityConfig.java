@@ -1,8 +1,7 @@
 package org.integrador4.ps.security;
 
-import org.integrador4.ps.model.Usuario;
-import org.integrador4.ps.services.DefaultUserService;
-import org.integrador4.ps.services.DefaultUserServiceImpl;
+import org.integrador4.ps.auth_service.Service.DefaultUserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;

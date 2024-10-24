@@ -1,13 +1,12 @@
 package org.integrador4.ps.services;
 
-import org.integrador4.ps.model.Carrera;
+
+import org.integrador4.ps.carrera.model.Carrera;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import org.integrador4.ps.model.*;
 
 
 @Service

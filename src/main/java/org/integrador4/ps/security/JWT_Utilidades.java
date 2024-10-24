@@ -5,7 +5,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import org.integrador4.ps.services.DefaultUserService;
+
+import org.integrador4.ps.auth_service.Service.DefaultUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -74,7 +75,7 @@ public class JWT_Utilidades {
 		return Jwts.builder()
 				.setClaims(claims)
 				.setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(2)))
+				.setExpiration(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(99999)))
 				.signWith(SignatureAlgorithm.HS256, SECRET)
 				.compact();
 	}
